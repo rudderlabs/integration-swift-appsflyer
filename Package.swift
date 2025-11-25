@@ -16,7 +16,7 @@ let package = Package(
         .library(
             name: "RudderIntegrationAppsFlyer",
             targets: ["RudderIntegrationAppsFlyer"]
-        ),
+        )
     ],
     dependencies: [
         .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static", .upToNextMajor(from: "6.17.0")),
@@ -36,6 +36,6 @@ let package = Package(
         .testTarget(
             name: "RudderIntegrationAppsFlyerTests",
             dependencies: ["RudderIntegrationAppsFlyer"]
-        ),
+        )
     ]
 )

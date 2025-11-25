@@ -7,6 +7,10 @@ import RudderStackAnalytics
  */
 public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
     
+    // MARK: - Adapter
+    
+    final var appsFlyerAdapter: AppsFlyerAdapter
+    
     // MARK: - IntegrationPlugin Properties
     
     /**
@@ -41,7 +45,13 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
     
     // MARK: - Initialization
     
-    public init() {}
+    init(appsFlyerAdapter: AppsFlyerAdapter) {
+        self.appsFlyerAdapter = appsFlyerAdapter
+    }
+    
+    public convenience init() {
+        self.init(appsFlyerAdapter: DefaultAppsFlyerAdapter())
+    }
     
     // MARK: - IntegrationPlugin Methods
     
@@ -49,6 +59,11 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
      * Creates and initializes the AppsFlyer integration
      */
     public func create(destinationConfig: [String: Any]) throws {
+        // Assign AppsFlyer instance if not already assigned
+        if appsFlyerAdapter.appsFlyerInstance == nil {
+            appsFlyerAdapter.appsFlyerInstance = appsFlyerAdapter.provideAppsFlyerInstance()
+        }
+        
         // Extract configuration
         isNewScreenEnabled = destinationConfig["useRichEventName"] as? Bool ?? false
         
@@ -60,7 +75,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
      * Required by IntegrationPlugin protocol
      */
     public func getDestinationInstance() -> Any? {
-        return AppsFlyerLib.shared()
+        return appsFlyerAdapter.appsFlyerInstance
     }
     
     /**
@@ -81,7 +96,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
     public func identify(payload: IdentifyEvent) {
         // Set customer user ID
         if let userId = payload.userId, !userId.isEmpty {
-            AppsFlyerLib.shared().customerUserID = userId
+            appsFlyerAdapter.setCustomerUserID(userId)
             LoggerAnalytics.debug("AppsFlyer: Set customer user ID: \(userId)")
         }
         
@@ -89,7 +104,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         if let traits = payload.context?["traits"] as? AnyCodable {
             if let traitsDictionary = traits.value as? [String: Any],
                let email = traitsDictionary["email"] as? String, !email.isEmpty {
-                AppsFlyerLib.shared().setUserEmails([email], with: EmailCryptTypeSHA256)
+                appsFlyerAdapter.setUserEmails([email], withCryptType: EmailCryptTypeSHA256)
                 LoggerAnalytics.debug("AppsFlyer: Set user email with SHA256 encryption")
             }
         }
@@ -189,7 +204,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         attachAllCustomProperties(afProperties: &afProperties, properties: properties)
         
         // Log the event
-        AppsFlyerLib.shared().logEvent(afEventName, withValues: afProperties)
+        appsFlyerAdapter.logEvent(afEventName, withValues: afProperties)
         LoggerAnalytics.debug("AppsFlyer: Logged event '\(afEventName)' with properties: \(afProperties)")
     }
     
@@ -214,7 +229,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         }
         
         // Log screen event
-        AppsFlyerLib.shared().logEvent(screenName, withValues: properties)
+        appsFlyerAdapter.logEvent(screenName, withValues: properties)
         LoggerAnalytics.debug("AppsFlyer: Logged screen event '\(screenName)' with properties: \(properties)")
     }
     
