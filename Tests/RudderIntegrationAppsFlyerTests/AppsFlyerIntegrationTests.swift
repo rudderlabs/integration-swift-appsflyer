@@ -16,25 +16,25 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Integration Plugin Properties Tests
     
-    @Test("Integration key should return correct value")
+    @Test("given integration is initialized, when key is accessed, then returns AppsFlyer")
     func testIntegrationKey() {
         #expect(integration.key == "AppsFlyer")
     }
     
-    @Test("Plugin type should be terminal")
+    @Test("given integration is initialized, when pluginType is accessed, then returns terminal")
     func testPluginType() {
         #expect(integration.pluginType == .terminal)
     }
     
     // MARK: - Initialization Tests
     
-    @Test("Default initialization should create DefaultAppsFlyerAdapter")
+    @Test("given default initialization, when integration is created, then creates DefaultAppsFlyerAdapter")
     func testDefaultInitialization() {
         let defaultIntegration = AppsFlyerIntegration()
         #expect(defaultIntegration.appsFlyerAdapter is DefaultAppsFlyerAdapter)
     }
     
-    @Test("Custom adapter initialization should use provided adapter")  
+    @Test("given custom adapter, when integration is initialized, then uses provided adapter")  
     func testCustomAdapterInitialization() {
         let customAdapter = MockAppsFlyerAdapter()
         let customIntegration = AppsFlyerIntegration(appsFlyerAdapter: customAdapter)
@@ -48,7 +48,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Create/Update Configuration Tests
     
-    @Test("Create with default configuration should initialize correctly")
+    @Test("given default configuration, when create is called, then initializes correctly")
     func testCreateWithDefaultConfiguration() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         
@@ -58,7 +58,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.appsFlyerInstance != nil)
     }
     
-    @Test("Create with useRichEventName enabled should set flag correctly")
+    @Test("given useRichEventName enabled, when create is called, then rich event names are used")
     func testCreateWithRichEventNameEnabled() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: true)
         
@@ -72,7 +72,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls[0].eventName == "Viewed Home Screen")
     }
     
-    @Test("Create with useRichEventName disabled should use simple screen name")
+    @Test("given useRichEventName disabled, when create is called, then simple screen names are used")
     func testCreateWithRichEventNameDisabled() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: false)
         
@@ -85,7 +85,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls[0].eventName == "screen")
     }
     
-    @Test("Update configuration should change settings without re-initialization")
+    @Test("given configuration is updated, when update is called, then settings change without re-initialization")
     func testUpdateConfiguration() throws {
         // Initial create with disabled rich event name
         let initialConfig = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: false)
@@ -107,7 +107,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls.last?.eventName == "Viewed Settings Screen")
     }
     
-    @Test("Get destination instance should return AppsFlyer instance")
+    @Test("given integration is created, when getDestinationInstance is called, then returns AppsFlyer instance")
     func testGetDestinationInstance() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -118,7 +118,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Identify Event Tests
     
-    @Test("Identify with userId should set customer user ID")
+    @Test("given identify event with userId, when identify is called, then customer user ID is set")
     func testIdentifyWithUserId() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -130,7 +130,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.setCustomerUserIDCalls[0] == "user123")
     }
     
-    @Test("Identify with empty userId should not set customer user ID")
+    @Test("given identify event with empty userId, when identify is called, then customer user ID is not set")
     func testIdentifyWithEmptyUserId() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -141,7 +141,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.setCustomerUserIDCalls.isEmpty)
     }
     
-    @Test("Identify with email should set user emails with SHA256 encryption")
+    @Test("given identify event with email, when identify is called, then user emails are set with SHA256 encryption")
     func testIdentifyWithEmail() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -157,7 +157,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.setUserEmailsCalls[0].cryptType == EmailCryptTypeSHA256)
     }
     
-    @Test("Identify without email should not set user emails")
+    @Test("given identify event without email, when identify is called, then user emails are not set")
     func testIdentifyWithoutEmail() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -168,7 +168,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.setUserEmailsCalls.isEmpty)
     }
     
-    @Test("Identify with empty email should not set user emails")
+    @Test("given identify event with empty email, when identify is called, then user emails are not set")
     func testIdentifyWithEmptyEmail() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -181,7 +181,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - E-commerce Event Tests
     
-    @Test("Product Viewed event should map to AFEventContentView")
+    @Test("given Product Viewed event, when track is called, then maps to AFEventContentView")
     func testProductViewedEvent() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -199,7 +199,7 @@ struct AppsFlyerIntegrationTests {
         #expect(loggedEvent.values[AFEventParamQuantity] as? Int == 1)
     }
     
-    @Test("Product Added event should map to AFEventAddToCart")
+    @Test("given Product Added event, when track is called, then maps to AFEventAddToCart")
     func testProductAddedEvent() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -215,7 +215,7 @@ struct AppsFlyerIntegrationTests {
         #expect(loggedEvent.values[AFEventParamPrice] as? Double == 49.99)
     }
     
-    @Test("Order Completed event should map to AFEventPurchase with products")
+    @Test("given Order Completed event, when track is called, then maps to AFEventPurchase with products")
     func testOrderCompletedEvent() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -239,7 +239,7 @@ struct AppsFlyerIntegrationTests {
         #expect(productCategories == ["electronics", "accessories"])
     }
     
-    @Test("Products Searched event should map to AFEventSearch")
+    @Test("given Products Searched event, when track is called, then maps to AFEventSearch")
     func testProductsSearchedEvent() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -253,7 +253,7 @@ struct AppsFlyerIntegrationTests {
         #expect(loggedEvent.values[AFEventParamSearchString] as? String == "running shoes")
     }
     
-    @Test("Promotion Viewed event should map to AFEventAdView")
+    @Test("given Promotion Viewed event, when track is called, then maps to AFEventAdView")
     func testPromotionViewedEvent() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -271,7 +271,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Custom Event Tests
     
-    @Test("Custom event should transform name and include custom properties")
+    @Test("given custom event, when track is called, then name is transformed and custom properties are included")
     func testCustomEvent() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -292,7 +292,7 @@ struct AppsFlyerIntegrationTests {
         #expect(loggedEvent.values["price"] == nil)
     }
     
-    @Test("Event with spaces in name should replace spaces with underscores")
+    @Test("given event with spaces in name, when track is called, then spaces are replaced with underscores")
     func testEventNameWithSpaces() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -304,7 +304,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls[0].eventName == "my_custom_event_name")
     }
     
-    @Test("Event with empty name should be dropped")
+    @Test("given event with empty name, when track is called, then event is dropped")
     func testEventWithEmptyName() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -317,7 +317,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Reserved Keywords Tests
     
-    @Test("Reserved keywords should be filtered out from custom properties")
+    @Test("given event with reserved keywords, when track is called, then reserved keywords are filtered out from custom properties")
     func testReservedKeywordsFiltering() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -347,7 +347,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Screen Event Tests
     
-    @Test("Screen event with rich naming disabled should use simple name")
+    @Test("given screen event with rich naming disabled, when screen is called, then simple name is used")
     func testScreenEventWithRichNamingDisabled() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: false)
         try integration.create(destinationConfig: config)
@@ -359,7 +359,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls[0].eventName == "screen")
     }
     
-    @Test("Screen event with rich naming enabled should use formatted name")
+    @Test("given screen event with rich naming enabled, when screen is called, then formatted name is used")
     func testScreenEventWithRichNamingEnabled() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: true)
         try integration.create(destinationConfig: config)
@@ -371,7 +371,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls[0].eventName == "Viewed Product Details Screen")
     }
     
-    @Test("Screen event with no name and no property should use generic name")
+    @Test("given screen event with no name and no property, when screen is called, then generic name is used")
     func testScreenEventWithNoName() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: true)
         try integration.create(destinationConfig: config)
@@ -383,7 +383,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls[0].eventName == "Viewed Screen")
     }
     
-    @Test("Screen event should include properties")
+    @Test("given screen event with properties, when screen is called, then properties are included")
     func testScreenEventWithProperties() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -400,7 +400,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Data Type Handling Tests
     
-    @Test("Event with complex data types should handle all types correctly")
+    @Test("given event with complex data types, when track is called, then all types are handled correctly")
     func testComplexDataTypes() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -433,7 +433,7 @@ struct AppsFlyerIntegrationTests {
         }
     }
     
-    @Test("Event with empty properties should not crash")
+    @Test("given event with empty properties, when track is called, then does not crash")
     func testEventWithEmptyProperties() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -448,7 +448,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Edge Cases Tests
     
-    @Test("Multiple events should be handled sequentially")
+    @Test("given multiple events, when processed sequentially, then all events are handled correctly")
     func testMultipleEvents() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
@@ -470,7 +470,7 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.logEventCalls.count == 2) // Track + Screen
     }
     
-    @Test("Configuration update should not affect already created instance")
+    @Test("given configuration is updated, when update is called, then already created instance is not affected")
     func testConfigurationUpdateDoesNotRecreateInstance() throws {
         let config1 = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: false)
         try integration.create(destinationConfig: config1)
@@ -488,7 +488,7 @@ struct AppsFlyerIntegrationTests {
         #expect(callCount1 == callCount2) // Should not have called provideAppsFlyerInstance again
     }
     
-    @Test("Nil adapter instance should handle gracefully")
+    @Test("given nil adapter instance, when methods are called, then handles gracefully")
     func testNilAdapterInstance() throws {
         mockAdapter.appsFlyerInstance = nil
         
@@ -512,7 +512,7 @@ struct AppsFlyerIntegrationTests {
     
     // MARK: - Integration Flow Tests
     
-    @Test("Complete user journey should work end-to-end")
+    @Test("given complete user journey, when all events are processed, then works end-to-end")
     func testCompleteUserJourney() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig(useRichEventName: true)
         try integration.create(destinationConfig: config)

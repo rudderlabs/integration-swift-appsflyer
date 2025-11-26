@@ -72,7 +72,6 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
     
     /**
      * Returns the AppsFlyer SDK instance
-     * Required by IntegrationPlugin protocol
      */
     public func getDestinationInstance() -> Any? {
         return appsFlyerAdapter.appsFlyerInstance
@@ -232,6 +231,9 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         appsFlyerAdapter.logEvent(screenName, withValues: properties)
         LoggerAnalytics.debug("AppsFlyer: Logged screen event '\(screenName)' with properties: \(properties)")
     }
+}
+
+extension AppsFlyerIntegration {
     
     // MARK: - Private Helper Methods
     
