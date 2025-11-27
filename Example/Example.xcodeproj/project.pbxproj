@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		855F54E62ED85A9300B76254 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855F54E52ED85A8F00B76254 /* AnalyticsManager.swift */; };
 		8595FAD22ED6ECEC00057B60 /* AppsFlyerExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8595FAD12ED6ECEC00057B60 /* AppsFlyerExampleApp.swift */; };
 		8595FAD42ED6ECEC00057B60 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8595FAD32ED6ECEC00057B60 /* ContentView.swift */; };
 		8595FAD62ED6ECEE00057B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8595FAD52ED6ECEE00057B60 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		855F54E52ED85A8F00B76254 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		8595FACE2ED6ECEC00057B60 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8595FAD12ED6ECEC00057B60 /* AppsFlyerExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsFlyerExampleApp.swift; sourceTree = "<group>"; };
 		8595FAD32ED6ECEC00057B60 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +38,7 @@
 		8595FAC52ED6ECEC00057B60 = {
 			isa = PBXGroup;
 			children = (
+				855F54E52ED85A8F00B76254 /* AnalyticsManager.swift */,
 				8595FACF2ED6ECEC00057B60 /* Products */,
 				8595FAD12ED6ECEC00057B60 /* AppsFlyerExampleApp.swift */,
 				8595FAD52ED6ECEE00057B60 /* Assets.xcassets */,
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				855F54E62ED85A9300B76254 /* AnalyticsManager.swift in Sources */,
 				8595FAD42ED6ECEC00057B60 /* ContentView.swift in Sources */,
 				8595FAD22ED6ECEC00057B60 /* AppsFlyerExampleApp.swift in Sources */,
 			);
@@ -285,13 +289,14 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
@@ -329,13 +334,14 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
