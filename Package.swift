@@ -21,7 +21,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static", .upToNextMajor(from: "6.17.0")),
         // TODO: Update rudder-sdk-swift dependency after the stable release of rudder-sdk-swift.
-        .package(url: "https://github.com/rudderlabs/rudder-sdk-swift.git", branch: "feat/sdk-502-make-standard-integration-public")
+        .package(url: "https://github.com/rudderlabs/rudder-sdk-swift.git", branch: "develop")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
