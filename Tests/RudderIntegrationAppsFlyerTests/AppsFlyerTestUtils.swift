@@ -72,25 +72,25 @@ struct AppsFlyerTestDataProvider {
 
     // E-commerce events
     static func createProductViewedEvent() -> TrackEvent {
-        let properties = [
+        let properties: [String: Any] = [
             "product_id": "123",
             "category": "shoes",
             "price": 99.99,
             "currency": "USD",
             "quantity": 1
-        ] as [String: Any]
+        ]
 
         return createTrackEvent(eventName: "Product Viewed", properties: properties)
     }
 
     static func createProductAddedEvent() -> TrackEvent {
-        let properties = [
+        let properties: [String: Any] = [
             "product_id": "456",
             "category": "clothing",
             "price": 49.99,
             "currency": "USD",
             "quantity": 2
-        ] as [String: Any]
+        ]
 
         return createTrackEvent(eventName: "Product Added", properties: properties)
     }
@@ -111,13 +111,13 @@ struct AppsFlyerTestDataProvider {
             ]
         ]
 
-        let properties = [
+        let properties: [String: Any] = [
             "order_id": "order_123",
             "total": 259.97,
             "revenue": 259.97,
             "currency": "USD",
             "products": products
-        ] as [String: Any]
+        ]
 
         return createTrackEvent(eventName: "Order Completed", properties: properties)
     }
@@ -131,21 +131,21 @@ struct AppsFlyerTestDataProvider {
     }
 
     static func createPromotionViewedEvent() -> TrackEvent {
-        let properties = [
+        let properties: [String: Any] = [
             "creative": "banner_ad",
             "currency": "USD"
-        ] as [String: Any]
+        ]
 
         return createTrackEvent(eventName: "Promotion Viewed", properties: properties)
     }
 
     static func createCustomEvent() -> TrackEvent {
-        let properties = [
+        let properties: [String: Any] = [
             "custom_property": "custom_value",
             "number_property": 42,
             "boolean_property": true,
             "price": 99.99 // This should be filtered out as it's reserved
-        ] as [String: Any]
+        ]
 
         return createTrackEvent(eventName: "Custom Event", properties: properties)
     }
@@ -199,7 +199,7 @@ struct AppsFlyerTestDataProvider {
     }
 
     static func createEventWithReservedKeywords() -> TrackEvent {
-        let properties = [
+        let properties: [String: Any] = [
             "query": "search_term",         // reserved
             "price": 99.99,                 // reserved
             "product_id": "prod123",        // reserved
@@ -214,7 +214,7 @@ struct AppsFlyerTestDataProvider {
             "creative": "banner",           // reserved
             "rating": 5,                    // reserved
             "custom_prop": "should_be_included" // not reserved
-        ] as [String: Any]
+        ]
 
         return createTrackEvent(eventName: "Reserved Keywords Event", properties: properties)
     }
