@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "integration-swift-appsflyer",
+    name: "RudderIntegrationAppsFlyer",
     platforms: [
         .iOS(.v15),
         .macOS(.v12),
