@@ -29,10 +29,18 @@ The AppsFlyer integration allows you to send your event data from RudderStack to
 Add the AppsFlyer integration to your Swift project using Swift Package Manager:
 
 1. In Xcode, go to `File > Add Package Dependencies`
+
+  <img width="960" height="540" alt="add_package_dependency" src="https://github.com/user-attachments/assets/56f2673c-127b-4766-b570-c07523c6bda4" />
+
 2. Enter the package repository URL: `https://github.com/rudderlabs/integration-swift-appsflyer` in the search bar
 3. Select the version you want to use
+
+  <img width="806" height="440" alt="select_package" src="https://github.com/user-attachments/assets/639884c1-b094-445e-b659-d8e4c1f09156" />
+
 4. Select the target to which you want to add the package
 5. Finally, click on **Add Package**
+
+   <img width="481" height="213" alt="select_target" src="https://github.com/user-attachments/assets/91a658d1-5c1d-4820-85d5-923d1c40c083" />
 
 Alternatively, add it to your `Package.swift` file:
 
