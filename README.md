@@ -40,7 +40,7 @@ Add the AppsFlyer integration to your Swift project using Swift Package Manager:
 4. Select the target to which you want to add the package
 5. Finally, click on **Add Package**
 
-   <img width="481" height="213" alt="select_target" src="https://github.com/user-attachments/assets/91a658d1-5c1d-4820-85d5-923d1c40c083" />
+   <img width="643" height="282" alt="select_trget" src="https://github.com/user-attachments/assets/78837ba6-faa7-4e6d-b030-b02cb12ba2a1" />
 
 Alternatively, add it to your `Package.swift` file:
 
