@@ -1,0 +1,24 @@
+{
+  "originHash" : "bd1d6547fe9fb1b3d6bfb36b5ca4c2674efaa1c03745b385a9a2d35bbc420982",
+  "pins" : [
+    {
+      "identity" : "appsflyerframework-static",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static",
+      "state" : {
+        "revision" : "02562ff7c8e19ffbbbf9e5717e456d686a61adef",
+        "version" : "6.17.7"
+      }
+    },
+    {
+      "identity" : "rudder-sdk-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rudderlabs/rudder-sdk-swift.git",
+      "state" : {
+        "revision" : "01fea0d07e79336d3a02acfb0eefa22a7e194497",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
