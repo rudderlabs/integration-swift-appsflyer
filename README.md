@@ -22,6 +22,8 @@
 
 The AppsFlyer integration allows you to send your event data from RudderStack to AppsFlyer for mobile measurement and user acquisition.
 
+> This SDK fully supports both Swift and Objective-C and can be used seamlessly in either type of project.
+
 ## Installation
 
 ### Swift Package Manager
