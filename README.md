@@ -78,7 +78,7 @@ let package = Package(
 This integration supports AppsFlyer iOS SDK version:
 
 ```
-7.0.0+
+7.x (>= 7.0.0, < 8.0.0)
 ```
 
 > **Note:** Version 2.0.0 of this integration requires AppsFlyer iOS SDK v7.
@@ -96,24 +96,38 @@ The integration supports the following platforms:
 
 ## Usage
 
-Initialize the RudderStack SDK and add the AppsFlyer integration:
+Initialize the AppsFlyer SDK, then initialize the RudderStack SDK and add the AppsFlyer integration:
 
 ```swift
 import RudderStackAnalytics
 import RudderIntegrationAppsFlyer
+import AppsFlyerLib
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // Initialize the RudderStack Analytics SDK
+        // 1. Initialize the AppsFlyer SDK.
+        //    Required: the SDK will not report anything until this is called.
+        AppsFlyerLib.shared().initialize(
+            devKey: "<APPSFLYER_DEV_KEY>",
+            appId: "<APPLE_APP_ID>"
+        )
+
+        // 2. Start the AppsFlyer SDK from inside the session-ready listener.
+        //    The SDK does not call `start()` for you.
+        AppsFlyerLib.shared().registerSessionReadyListener {
+            AppsFlyerLib.shared().start()
+        }
+
+        // 3. Initialize the RudderStack Analytics SDK
         let config = Configuration(
             writeKey: "<WRITE_KEY>",
             dataPlaneUrl: "<DATA_PLANE_URL>"
         )
         let analytics = Analytics(configuration: config)
 
-        // Add AppsFlyer integration
+        // 4. Add AppsFlyer integration
         analytics.add(plugin: AppsFlyerIntegration())
 
         return true
@@ -122,8 +136,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ```
 
 Replace:
+- `<APPSFLYER_DEV_KEY>`: Your AppsFlyer dev key, from **My Account** in the AppsFlyer dashboard
+- `<APPLE_APP_ID>`: Your numeric Apple App ID, digits only (for example `123456789`, not `id123456789`)
 - `<WRITE_KEY>`: Your project's write key from the RudderStack dashboard
 - `<DATA_PLANE_URL>`: The URL of your RudderStack data plane
+
+> **Important:** Steps 1 and 2 are required by AppsFlyer SDK v7. If `initialize(devKey:appId:)`
+> and `start()` are not called, this integration will still forward events to the AppsFlyer SDK,
+> but the SDK will not send them to AppsFlyer — with no error reported.
+
+### App Tracking Transparency (ATT)
+
+If your app requests ATT consent, collect it inside the session-ready listener and call
+`start()` once the status resolves (requires `import AppTrackingTransparency`):
+
+```swift
+AppsFlyerLib.shared().registerSessionReadyListener {
+    ATTrackingManager.requestTrackingAuthorization { _ in
+        AppsFlyerLib.shared().start()
+    }
+}
+```
+
+> **Note:** With this pattern `start()` runs only after the user responds to the ATT prompt.
+> Until then no events are sent. If you need a guaranteed start, add your own timeout that
+> calls `start()` regardless of whether the prompt has been answered.
+
+For a complete working setup, see [`Example/AppsFlyerExampleApp.swift`](Example/AppsFlyerExampleApp.swift).
 
 ---
 
