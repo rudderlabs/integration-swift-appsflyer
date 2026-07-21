@@ -15,8 +15,6 @@ import AdSupport
 @main
 struct AppsFlyerExampleApp: App {
 
-    @Environment(\.scenePhase) private var scenePhase
-
     init() {
         setupAppsFlyer()
         setupAnalytics()
@@ -25,11 +23,6 @@ struct AppsFlyerExampleApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-        }.onChange(of: scenePhase) {
-            if scenePhase == .active {
-                startAppsFlyer()
-                requestTrackingPermission()
-            }
         }
     }
 
@@ -41,14 +34,26 @@ struct AppsFlyerExampleApp: App {
         } else {
             LoggerAnalytics.debug("Device IDFV: Not available")
         }
-        
-        // Initialize AppsFlyer SDK first (before Analytics)
-        AppsFlyerLib.shared().appsFlyerDevKey = "<YOUR_APPSFLYER_DEV_KEY>"
-        AppsFlyerLib.shared().appleAppID = "<YOUR_APPLE_APP_ID>"
+
+        // Initialize AppsFlyer SDK first (before Analytics).
+        // In SDK v7, credentials are supplied via `initialize(devKey:appId:)`;
+        // the `appsFlyerDevKey`/`appleAppID` properties are now read-only.
+        // Enable debug logging before `initialize(devKey:appId:)` — setting it
+        // afterwards is too late for the SDK to pick up and suppresses its logs.
         AppsFlyerLib.shared().isDebug = true
-        
-        // Wait for ATT user authorization with timeout
-        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
+        AppsFlyerLib.shared().initialize(
+            devKey: "<YOUR_APPSFLYER_DEV_KEY>",
+            appId: "<YOUR_APPLE_APP_ID>"
+        )
+
+        // In SDK v7 the SDK no longer manages ATT timing internally. Register a
+        // session-ready listener and start the SDK from inside it, collecting
+        // ATT consent first so the session carries the resolved status.
+        AppsFlyerLib.shared().registerSessionReadyListener {
+            requestTrackingPermission {
+                AppsFlyerLib.shared().start()
+            }
+        }
     }
 
     private func setupAnalytics() {
@@ -67,11 +72,9 @@ struct AppsFlyerExampleApp: App {
         AnalyticsManager.shared.analytics = analytics
     }
 
-    private func startAppsFlyer() {
-        AppsFlyerLib.shared().start()
-    }
-
-    private func requestTrackingPermission() {
+    /// Requests ATT authorization and invokes `completion` once the user has
+    /// responded, so the caller can start the SDK with a resolved status.
+    private func requestTrackingPermission(completion: @escaping () -> Void) {
         ATTrackingManager.requestTrackingAuthorization { status in
             LoggerAnalytics.debug("ATT Status: \(status.rawValue)")
             switch status {
@@ -86,6 +89,7 @@ struct AppsFlyerExampleApp: App {
             @unknown default:
                 LoggerAnalytics.debug("Unknown tracking status")
             }
+            completion()
         }
     }
 }

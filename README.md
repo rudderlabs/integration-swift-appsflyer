@@ -78,8 +78,13 @@ let package = Package(
 This integration supports AppsFlyer iOS SDK version:
 
 ```
-6.17.0+
+7.0.0+
 ```
+
+> **Note:** Version 2.0.0 of this integration requires AppsFlyer iOS SDK v7.
+> If your app is still on AppsFlyer SDK v6, continue using the 1.x line of this
+> integration. See AppsFlyer's [migration guide](https://dev.appsflyer.com/hc/docs/migrate-ios-sdk-to-v7)
+> for details on moving your app to v7.
 
 ### Platform Support
 
