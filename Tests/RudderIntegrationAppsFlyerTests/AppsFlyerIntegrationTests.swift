@@ -123,7 +123,7 @@ struct AppsFlyerIntegrationTests {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
         
-        let identifyEvent = AppsFlyerTestDataProvider.createIdentifyEvent(userId: "user123")
+        let identifyEvent = AppsFlyerTestDataProvider.createIdentifyEvent(userId: "user123", email: nil)
         integration.identify(payload: identifyEvent)
         
         #expect(mockAdapter.setCustomerUserIDCalls.count == 1)
@@ -141,8 +141,8 @@ struct AppsFlyerIntegrationTests {
         #expect(mockAdapter.setCustomerUserIDCalls.isEmpty)
     }
     
-    @Test("given identify event with email, when identify is called, then user emails are set with SHA256 encryption")
-    func testIdentifyWithEmail() throws {
+    @Test("given identify event with userId and email, when identify is called, then only customer user ID is set")
+    func testIdentifyWithUserIdAndEmail() throws {
         let config = AppsFlyerTestDataProvider.createDestinationConfig()
         try integration.create(destinationConfig: config)
         
@@ -152,31 +152,8 @@ struct AppsFlyerIntegrationTests {
         )
         integration.identify(payload: identifyEvent)
         
-        #expect(mockAdapter.setUserEmailsCalls.count == 1)
-        #expect(mockAdapter.setUserEmailsCalls[0].emails == ["test@example.com"])
-        #expect(mockAdapter.setUserEmailsCalls[0].cryptType == EmailCryptTypeSHA256)
-    }
-    
-    @Test("given identify event without email, when identify is called, then user emails are not set")
-    func testIdentifyWithoutEmail() throws {
-        let config = AppsFlyerTestDataProvider.createDestinationConfig()
-        try integration.create(destinationConfig: config)
-        
-        let identifyEvent = AppsFlyerTestDataProvider.createIdentifyEvent(userId: "user123", email: String?.none)
-        integration.identify(payload: identifyEvent)
-        
-        #expect(mockAdapter.setUserEmailsCalls.isEmpty)
-    }
-    
-    @Test("given identify event with empty email, when identify is called, then user emails are not set")
-    func testIdentifyWithEmptyEmail() throws {
-        let config = AppsFlyerTestDataProvider.createDestinationConfig()
-        try integration.create(destinationConfig: config)
-        
-        let identifyEvent = AppsFlyerTestDataProvider.createIdentifyEvent(userId: "user123", email: "")
-        integration.identify(payload: identifyEvent)
-        
-        #expect(mockAdapter.setUserEmailsCalls.isEmpty)
+        #expect(mockAdapter.setCustomerUserIDCalls == ["user123"])
+        #expect(mockAdapter.logEventCalls.isEmpty)
     }
     
     // MARK: - E-commerce Event Tests
@@ -466,7 +443,6 @@ struct AppsFlyerIntegrationTests {
         integration.screen(payload: screenEvent)
         
         #expect(mockAdapter.setCustomerUserIDCalls.count == 1)
-        #expect(mockAdapter.setUserEmailsCalls.count == 1)
         #expect(mockAdapter.logEventCalls.count == 2) // Track + Screen
     }
     
@@ -546,7 +522,6 @@ struct AppsFlyerIntegrationTests {
         
         // Verify all events were tracked
         #expect(mockAdapter.setCustomerUserIDCalls.count == 1)
-        #expect(mockAdapter.setUserEmailsCalls.count == 1)
         #expect(mockAdapter.logEventCalls.count == 5) // Home screen + 4 track events
         
         // Verify event names

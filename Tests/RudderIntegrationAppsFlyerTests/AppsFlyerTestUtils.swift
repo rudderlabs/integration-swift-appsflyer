@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AppsFlyerLib
 import RudderStackAnalytics
 @testable import RudderIntegrationAppsFlyer
 
@@ -19,16 +18,11 @@ class MockAppsFlyerAdapter: AppsFlyerAdapter {
 
     // Capture method calls for verification
     var setCustomerUserIDCalls: [String?] = []
-    var setUserEmailsCalls: [(emails: [String], cryptType: EmailCryptType)] = []
     var logEventCalls: [(eventName: String, values: [String: Any])] = []
     var provideAppsFlyerInstanceCallCount: Int = 0
 
     func setCustomerUserID(_ customerUserID: String?) {
         setCustomerUserIDCalls.append(customerUserID)
-    }
-
-    func setUserEmails(_ userEmails: [String], withCryptType type: EmailCryptType) {
-        setUserEmailsCalls.append((emails: userEmails, cryptType: type))
     }
 
     func logEvent(_ eventName: String, withValues values: [String: Any]) {
