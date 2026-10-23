@@ -99,12 +99,12 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
             LoggerAnalytics.debug("AppsFlyer: Set customer user ID: \(userId)")
         }
         
-        // Handle email with SHA256 encryption
+        // Handle email — AppsFlyer hashes it on-device (SHA-256) before use
         if let traits = payload.context?["traits"] as? AnyCodable {
             if let traitsDictionary = traits.value as? [String: Any],
                let email = traitsDictionary["email"] as? String, !email.isEmpty {
-                appsFlyerAdapter.setUserEmails([email], withCryptType: EmailCryptTypeSHA256)
-                LoggerAnalytics.debug("AppsFlyer: Set user email with SHA256 encryption")
+                appsFlyerAdapter.setUserEmail(email)
+                LoggerAnalytics.debug("AppsFlyer: Set user email")
             }
         }
     }

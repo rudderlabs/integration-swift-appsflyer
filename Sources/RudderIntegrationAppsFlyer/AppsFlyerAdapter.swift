@@ -14,7 +14,7 @@ import AppsFlyerLib
 protocol AppsFlyerAdapter {
     var appsFlyerInstance: Any? { get set }
     func setCustomerUserID(_ customerUserID: String?)
-    func setUserEmails(_ userEmails: [String], withCryptType type: EmailCryptType)
+    func setUserEmail(_ userEmail: String)
     func logEvent(_ eventName: String, withValues values: [String: Any])
     func provideAppsFlyerInstance() -> Any
 }
@@ -31,8 +31,8 @@ class DefaultAppsFlyerAdapter: AppsFlyerAdapter {
         appsFlyer?.customerUserID = customerUserID
     }
 
-    func setUserEmails(_ userEmails: [String], withCryptType type: EmailCryptType) {
-        appsFlyer?.setUserEmails(userEmails, with: type)
+    func setUserEmail(_ userEmail: String) {
+        appsFlyer?.setUserEmail(userEmail)
     }
 
     func logEvent(_ eventName: String, withValues values: [String: Any]) {
