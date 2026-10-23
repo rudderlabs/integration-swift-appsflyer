@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://rudderstack.com/">
-    <img alt="RudderStack" width="512" src="https://raw.githubusercontent.com/rudderlabs/rudder-sdk-js/develop/assets/rs-logo-full-light.jpg">
+    <img alt="RudderStack" width="512" src="https://cdn.rudderlabs.com/brand/logo_watermark_light.png">
   </a>
   <br />
   <caption>The Customer Data Platform for Developers</caption>
@@ -78,10 +78,11 @@ let package = Package(
 This integration supports AppsFlyer iOS SDK version:
 
 ```
-7.x (>= 7.0.0, < 8.0.0)
+7.x (>= 7.0.1, < 8.0.0)
 ```
 
-> **Note:** Version 2.0.0 of this integration requires AppsFlyer iOS SDK v7.
+> **Note:** Version 2.1.0 and later require AppsFlyer iOS SDK **7.0.1 or later**
+> (7.0.1 replaced `setUserEmails(_:withCryptType:)` with `setUserEmail(_:)`).
 > If your app is still on AppsFlyer SDK v6, continue using the 1.x line of this
 > integration. See AppsFlyer's [migration guide](https://dev.appsflyer.com/hc/docs/migrate-ios-sdk-to-v7)
 > for details on moving your app to v7.
