@@ -73,6 +73,20 @@ let package = Package(
 )
 ```
 
+### AppsFlyer package
+
+The integration depends on the static AppsFlyer package, `AppsFlyerFramework-Static`. If your app also adds the AppsFlyer SDK itself, it must add the same package, with the product `AppsFlyerLib-Static`. Your code still uses `import AppsFlyerLib`.
+
+```swift
+.package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static", .upToNextMajor(from: "7.0.1"))
+```
+
+```swift
+.product(name: "AppsFlyerLib-Static", package: "AppsFlyerFramework-Static")
+```
+
+Swift Package Manager cannot build an app that gets AppsFlyer from two packages, for example `AppsFlyerFramework` and `AppsFlyerFramework-Static`. A Swift Package Manager mirror does not help here, because the two packages give their product different names.
+
 ## Supported Native AppsFlyer SDK Version
 
 This integration supports AppsFlyer iOS SDK version:
