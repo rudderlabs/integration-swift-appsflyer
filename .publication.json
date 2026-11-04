@@ -1,0 +1,93 @@
+{
+  "copiedFiles": [
+    {
+      "output": "Sources/RudderIntegrationAppsFlyer/AppsFlyerAdapter.swift",
+      "source": "Integrations/AppsFlyer/Sources/RudderIntegrationAppsFlyer/AppsFlyerAdapter.swift",
+      "transform": "copy"
+    },
+    {
+      "output": "Sources/RudderIntegrationAppsFlyer/AppsFlyerIntegration.swift",
+      "source": "Integrations/AppsFlyer/Sources/RudderIntegrationAppsFlyer/AppsFlyerIntegration.swift",
+      "transform": "copy"
+    },
+    {
+      "output": "Sources/RudderIntegrationAppsFlyer/ObjCAppsFlyerIntegration.swift",
+      "source": "Integrations/AppsFlyer/Sources/RudderIntegrationAppsFlyer/ObjCAppsFlyerIntegration.swift",
+      "transform": "copy"
+    },
+    {
+      "output": "Sources/RudderIntegrationAppsFlyer/Version.swift",
+      "source": "Integrations/AppsFlyer/Sources/RudderIntegrationAppsFlyer/Version.swift",
+      "transform": "copy"
+    },
+    {
+      "output": "CHANGELOG.md",
+      "source": "Integrations/AppsFlyer/CHANGELOG.md",
+      "transform": "copy"
+    },
+    {
+      "output": "LICENSE",
+      "source": "LICENSE",
+      "transform": "copy"
+    },
+    {
+      "output": "README.md",
+      "source": "Integrations/AppsFlyer/README.md",
+      "transform": "generated"
+    },
+    {
+      "output": ".github/CODEOWNERS",
+      "source": null,
+      "transform": "generated"
+    },
+    {
+      "output": ".gitignore",
+      "source": null,
+      "transform": "generated"
+    },
+    {
+      "output": "CONTRIBUTING.md",
+      "source": null,
+      "transform": "generated"
+    },
+    {
+      "output": "Package.swift",
+      "source": null,
+      "transform": "generated"
+    },
+    {
+      "output": "VERSION",
+      "source": null,
+      "transform": "generated"
+    }
+  ],
+  "fileHashes": {
+    ".github/CODEOWNERS": "b6186d483919a45be6dd29537a58adc1a5a34338ab74fcf6e9985506c18eb025",
+    ".gitignore": "6c3f21e0d020c2a3887f176d7d69e0e6456e31888e053bf9dd5d1c5c78972aeb",
+    "CHANGELOG.md": "feb2455fd20bb9006b000a0641e0630c468560703f44d6c02f5b2e984ef1e416",
+    "CONTRIBUTING.md": "d7d4d107ad5c6b8411e78b543d4210fc02e6aec6c1c1401a3aecc348437efeb3",
+    "LICENSE": "130c075edb106634e90df2eb62cba8f7a3cb2c0e8ccec39cb168fc649684205d",
+    "Package.swift": "d475066dc7c44a9be1cb7b41da413ddf436b543baaeee0d4576a88fdecad5a3f",
+    "README.md": "f4f5a28589669368ac58e3ef217346a5407b180866a6b0b4e75728822021e82a",
+    "Sources/RudderIntegrationAppsFlyer/AppsFlyerAdapter.swift": "c6a7e729a3f9684f133f39a136bff64fe82f73fef80f3725794ed53fdab6c319",
+    "Sources/RudderIntegrationAppsFlyer/AppsFlyerIntegration.swift": "ccbd7bbac636bc9859ffc31235e318385e6562fec39632655b8ae9a08288ea66",
+    "Sources/RudderIntegrationAppsFlyer/ObjCAppsFlyerIntegration.swift": "940ebf5739ceb2d6fdc6e9da1aacba8110972fefb31a68f2bb79206ccaf0a0f2",
+    "Sources/RudderIntegrationAppsFlyer/Version.swift": "b6d92491e0c1c9b12c634dcbec44f8d23bf87a2d44912dc76b29e6b80808ff21",
+    "VERSION": "2985be8b28d3ade858e8d8fb4bc22f565b1bf6020dff982dce141f7721b9999c"
+  },
+  "package": "appsflyer",
+  "policies": {
+    "RudderStackAnalytics": {
+      "mode": "external",
+      "package": "swift-sdk"
+    }
+  },
+  "schemaVersion": 1,
+  "sourceCommit": "bf57883256df8aa3c321f91d63b53b7876b78b25",
+  "sourceRepository": "rudderlabs/rudder-monorepo-swift",
+  "targetClosure": [
+    "RudderStackAnalytics",
+    "RudderIntegrationAppsFlyer"
+  ],
+  "version": "3.0.0"
+}
