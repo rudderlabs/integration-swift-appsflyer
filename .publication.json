@@ -64,16 +64,16 @@
   "fileHashes": {
     ".github/CODEOWNERS": "b6186d483919a45be6dd29537a58adc1a5a34338ab74fcf6e9985506c18eb025",
     ".gitignore": "6c3f21e0d020c2a3887f176d7d69e0e6456e31888e053bf9dd5d1c5c78972aeb",
-    "CHANGELOG.md": "feb2455fd20bb9006b000a0641e0630c468560703f44d6c02f5b2e984ef1e416",
+    "CHANGELOG.md": "055cae21ac7125de50f7807224c6cca2aec34ebb64387404fa15b8d0c4dbdc6f",
     "CONTRIBUTING.md": "d7d4d107ad5c6b8411e78b543d4210fc02e6aec6c1c1401a3aecc348437efeb3",
     "LICENSE": "130c075edb106634e90df2eb62cba8f7a3cb2c0e8ccec39cb168fc649684205d",
-    "Package.swift": "d475066dc7c44a9be1cb7b41da413ddf436b543baaeee0d4576a88fdecad5a3f",
-    "README.md": "f4f5a28589669368ac58e3ef217346a5407b180866a6b0b4e75728822021e82a",
+    "Package.swift": "d5ddef887e830b9d270815eaf8b3d903b6c768fb679bad19e3b0dca9f390a5e4",
+    "README.md": "4540f1d50a243f2e7616a930a3bb197e413d21dea5e5557fb66b4645b25dde82",
     "Sources/RudderIntegrationAppsFlyer/AppsFlyerAdapter.swift": "c6a7e729a3f9684f133f39a136bff64fe82f73fef80f3725794ed53fdab6c319",
     "Sources/RudderIntegrationAppsFlyer/AppsFlyerIntegration.swift": "ccbd7bbac636bc9859ffc31235e318385e6562fec39632655b8ae9a08288ea66",
     "Sources/RudderIntegrationAppsFlyer/ObjCAppsFlyerIntegration.swift": "940ebf5739ceb2d6fdc6e9da1aacba8110972fefb31a68f2bb79206ccaf0a0f2",
-    "Sources/RudderIntegrationAppsFlyer/Version.swift": "b6d92491e0c1c9b12c634dcbec44f8d23bf87a2d44912dc76b29e6b80808ff21",
-    "VERSION": "2985be8b28d3ade858e8d8fb4bc22f565b1bf6020dff982dce141f7721b9999c"
+    "Sources/RudderIntegrationAppsFlyer/Version.swift": "c6f9505d7656befa6b24f2a36b36100e7dbf0037b0745c88bd9f8b6f96e9ec5d",
+    "VERSION": "06e3fe4a7a1884d20d81cc7065ca8cfd4c394ec602c4d180ddc39bbd4f7da521"
   },
   "package": "appsflyer",
   "policies": {
@@ -83,11 +83,11 @@
     }
   },
   "schemaVersion": 1,
-  "sourceCommit": "bf57883256df8aa3c321f91d63b53b7876b78b25",
+  "sourceCommit": "591f671ab862d2c9f7335c9885647908b32e0ac3",
   "sourceRepository": "rudderlabs/rudder-monorepo-swift",
   "targetClosure": [
     "RudderStackAnalytics",
     "RudderIntegrationAppsFlyer"
   ],
-  "version": "3.0.0"
+  "version": "3.0.1"
 }
