@@ -64,16 +64,16 @@
   "fileHashes": {
     ".github/CODEOWNERS": "b6186d483919a45be6dd29537a58adc1a5a34338ab74fcf6e9985506c18eb025",
     ".gitignore": "6c3f21e0d020c2a3887f176d7d69e0e6456e31888e053bf9dd5d1c5c78972aeb",
-    "CHANGELOG.md": "055cae21ac7125de50f7807224c6cca2aec34ebb64387404fa15b8d0c4dbdc6f",
-    "CONTRIBUTING.md": "d7d4d107ad5c6b8411e78b543d4210fc02e6aec6c1c1401a3aecc348437efeb3",
+    "CHANGELOG.md": "665186644d2aee3477339e2be9c09211d7bf0e51038f95827afb16b8cb5e7c97",
+    "CONTRIBUTING.md": "16cc37a206bc8ff87fd01913e4f94e45c254beb5b3b3602e791a8ee0014f87ae",
     "LICENSE": "130c075edb106634e90df2eb62cba8f7a3cb2c0e8ccec39cb168fc649684205d",
-    "Package.swift": "d5ddef887e830b9d270815eaf8b3d903b6c768fb679bad19e3b0dca9f390a5e4",
-    "README.md": "4540f1d50a243f2e7616a930a3bb197e413d21dea5e5557fb66b4645b25dde82",
+    "Package.swift": "3b7bfc449c804994a2673e7ea67c53f43b2a7a7de2f50b2478a1994ba82db3a6",
+    "README.md": "b840f41f0db3c754e6534a9e3cf082461c20a757537dd59e6e257d4c379db839",
     "Sources/RudderIntegrationAppsFlyer/AppsFlyerAdapter.swift": "c6a7e729a3f9684f133f39a136bff64fe82f73fef80f3725794ed53fdab6c319",
-    "Sources/RudderIntegrationAppsFlyer/AppsFlyerIntegration.swift": "ccbd7bbac636bc9859ffc31235e318385e6562fec39632655b8ae9a08288ea66",
+    "Sources/RudderIntegrationAppsFlyer/AppsFlyerIntegration.swift": "8de3dbe3696bc654020973205cb916319f3f7c6137cbf6bafa94133b901d30ca",
     "Sources/RudderIntegrationAppsFlyer/ObjCAppsFlyerIntegration.swift": "940ebf5739ceb2d6fdc6e9da1aacba8110972fefb31a68f2bb79206ccaf0a0f2",
-    "Sources/RudderIntegrationAppsFlyer/Version.swift": "c6f9505d7656befa6b24f2a36b36100e7dbf0037b0745c88bd9f8b6f96e9ec5d",
-    "VERSION": "06e3fe4a7a1884d20d81cc7065ca8cfd4c394ec602c4d180ddc39bbd4f7da521"
+    "Sources/RudderIntegrationAppsFlyer/Version.swift": "dd1d1375edd6b88282988e1905d950e092053e297e4c10e62d73593add3c6209",
+    "VERSION": "e1d49c569ae09b2ede16e2d83820a3809b35eb6c44c13ba9b5330598d6b8f43c"
   },
   "package": "appsflyer",
   "policies": {
@@ -83,11 +83,11 @@
     }
   },
   "schemaVersion": 1,
-  "sourceCommit": "591f671ab862d2c9f7335c9885647908b32e0ac3",
+  "sourceCommit": "837ab007a009d41d4ee7987fd69a342aaa4edb4d",
   "sourceRepository": "rudderlabs/rudder-monorepo-swift",
   "targetClosure": [
     "RudderStackAnalytics",
     "RudderIntegrationAppsFlyer"
   ],
-  "version": "3.0.1"
+  "version": "4.0.0"
 }

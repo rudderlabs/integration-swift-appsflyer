@@ -67,7 +67,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         // Extract configuration
         isNewScreenEnabled = destinationConfig["useRichEventName"] as? Bool ?? false
         
-        LoggerAnalytics.debug("AppsFlyer integration initialized with useRichEventName: \(isNewScreenEnabled)")
+        logger.debug(log: "AppsFlyer integration initialized with useRichEventName: \(isNewScreenEnabled)")
     }
     
     /**
@@ -84,7 +84,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         // Update configuration without re-initialization
         isNewScreenEnabled = destinationConfig["useRichEventName"] as? Bool ?? false
         
-        LoggerAnalytics.debug("AppsFlyer integration configuration updated with useRichEventName: \(isNewScreenEnabled)")
+        logger.debug(log: "AppsFlyer integration configuration updated with useRichEventName: \(isNewScreenEnabled)")
     }
     
     // MARK: - Event Methods
@@ -96,7 +96,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         // Set customer user ID
         if let userId = payload.userId, !userId.isEmpty {
             appsFlyerAdapter.setCustomerUserID(userId)
-            LoggerAnalytics.debug("AppsFlyer: Set customer user ID: \(userId)")
+            logger.debug(log: "AppsFlyer: Set customer user ID: \(userId)")
         }
         
         // Handle email — AppsFlyer hashes it on-device (SHA-256) before use
@@ -104,7 +104,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
             if let traitsDictionary = traits.value as? [String: Any],
                let email = traitsDictionary["email"] as? String, !email.isEmpty {
                 appsFlyerAdapter.setUserEmail(email)
-                LoggerAnalytics.debug("AppsFlyer: Set user email")
+                logger.debug(log: "AppsFlyer: Set user email")
             }
         }
     }
@@ -115,7 +115,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
     public func track(payload: TrackEvent) {
         let eventName = payload.event
         guard !eventName.isEmpty else {
-            LoggerAnalytics.debug("AppsFlyer: Event name is empty, dropping track event")
+            logger.debug(log: "AppsFlyer: Event name is empty, dropping track event")
             return
         }
         
@@ -204,7 +204,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         
         // Log the event
         appsFlyerAdapter.logEvent(afEventName, withValues: afProperties)
-        LoggerAnalytics.debug("AppsFlyer: Logged event '\(afEventName)' with properties: \(afProperties)")
+        logger.debug(log: "AppsFlyer: Logged event '\(afEventName)' with properties: \(afProperties)")
     }
     
     /**
@@ -229,7 +229,7 @@ public class AppsFlyerIntegration: IntegrationPlugin, StandardIntegration {
         
         // Log screen event
         appsFlyerAdapter.logEvent(screenName, withValues: properties)
-        LoggerAnalytics.debug("AppsFlyer: Logged screen event '\(screenName)' with properties: \(properties)")
+        logger.debug(log: "AppsFlyer: Logged screen event '\(screenName)' with properties: \(properties)")
     }
 }
 
