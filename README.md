@@ -75,17 +75,24 @@ let package = Package(
 
 ### AppsFlyer package
 
-The integration depends on the static AppsFlyer package, `AppsFlyerFramework-Static`. If your app also adds the AppsFlyer SDK itself, it must add the same package, with the product `AppsFlyerLib-Static`. Your code still uses `import AppsFlyerLib`.
+The integration depends on the AppsFlyer package `AppsFlyerFramework`, with the product `AppsFlyerLib`. If your app also adds the AppsFlyer SDK itself, it must add the same package. Your code uses `import AppsFlyerLib`.
 
 ```swift
-.package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static", .upToNextMajor(from: "7.0.1"))
+.package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework", .upToNextMajor(from: "7.0.1"))
 ```
 
 ```swift
-.product(name: "AppsFlyerLib-Static", package: "AppsFlyerFramework-Static")
+.product(name: "AppsFlyerLib", package: "AppsFlyerFramework")
 ```
 
 Swift Package Manager cannot build an app that gets AppsFlyer from two packages, for example `AppsFlyerFramework` and `AppsFlyerFramework-Static`. A Swift Package Manager mirror does not help here, because the two packages give their product different names.
+
+### Migrating to 4.0.0
+
+Version 4.0.0 moves the integration from `AppsFlyerFramework-Static` to `AppsFlyerFramework`. Both packages contain the same AppsFlyer SDK binary, so the app size does not change. The first package resolve downloads more data, because the `AppsFlyerFramework` repository is larger.
+
+- If your app does not add the AppsFlyer SDK itself, update the integration. No other change is needed.
+- If your app adds `AppsFlyerFramework-Static`, replace it with `AppsFlyerFramework`, and replace the product `AppsFlyerLib-Static` with `AppsFlyerLib`. Your code does not change.
 
 ## Supported Native AppsFlyer SDK Version
 
@@ -176,7 +183,7 @@ AppsFlyerLib.shared().registerSessionReadyListener {
 > Until then no events are sent. If you need a guaranteed start, add your own timeout that
 > calls `start()` regardless of whether the prompt has been answered.
 
-For a complete working setup, see [`Example/AppsFlyerExampleApp.swift`](Example/AppsFlyerExampleApp.swift).
+For a complete working setup, see [`AppsFlyerExampleApp.swift`](https://github.com/rudderlabs/rudder-monorepo-swift/blob/main/Examples/AppsFlyer/AppsFlyerExampleApp.swift) in rudder-monorepo-swift.
 
 ---
 
@@ -196,4 +203,4 @@ For more information:
 
 ## Report issues / contribute
 
-This repository only publishes releases; it does not accept pull requests. To report a bug or request a feature, [open an issue](https://github.com/rudderlabs/integration-swift-appsflyer/issues). See [CONTRIBUTING.md](CONTRIBUTING.md).
+This repository is read-only: it only publishes releases of this package from [rudder-monorepo-swift](https://github.com/rudderlabs/rudder-monorepo-swift). It does not accept issues or pull requests. To report a bug or request a feature, [open an issue in rudder-monorepo-swift](https://github.com/rudderlabs/rudder-monorepo-swift/issues/new/choose). See [CONTRIBUTING.md](CONTRIBUTING.md).
